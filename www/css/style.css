@@ -1,5 +1,32 @@
+* {
+    font-family: sans-serif !important;
+}
 .item {
     border-top: none;
     border-right: none;
     border-left: none;
+}
+
+#games {
+    text-align: center;
+}
+#games h2, h3, h4 {
+    line-height: 100%;
+}
+#games h3:nth-of-type(2) {
+    margin-top: 0;
+}
+#games .item-input input {
+    height: auto;
+    text-align: left;
+    font-size: 3em;
+}
+#games label > span {
+    font-size: 3em;
+    flex: 1 0 120px;
+}
+
+#games .bachokimithai {
+    width: 150px;
+    font-size: 3em;
 }
