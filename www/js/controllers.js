@@ -1,6 +1,18 @@
 angular.module('Rishwat.controllers', [])
 
 .controller('ReportCtrl', function($scope) {
+    $scope.display = "none";
+
+    $scope.onClick = function() {
+        var display = $scope.display;
+        if (undefined === display || "none" === display) {
+            $scope.display = "block";
+            $scope.displayy = "none";
+        } else {
+            $scope.display = "none";
+            $scope.displayy = "none";
+        }
+    };
 })
 
 .controller('VisualizeCtrl', function($scope, $ionicLoading) {

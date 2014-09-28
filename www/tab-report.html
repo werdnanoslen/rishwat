@@ -1,8 +1,16 @@
 <ion-view title="Rishwat | Report">
     <ion-content class="has-header padding">
-        <img src="img/icon_12334.png" alt="" style="width:60%; margin: 0 auto; display: block;" />
+        <a ng-click="onClick()" class="button button-outline button-stable" style="padding-top: 10px;">
+            <img src="img/icon_12334.png" alt="" style="width:60%; margin: 0 auto; display: block;" />
+            Report Fish
+        </a>
+        <br /><br />
+        <a ng-click="onClick()" class="button button-outline button-stable" style="padding-top: 10px;display:{{displayy}}">
+            <img src="img/icon_4657.png" alt="" style="width:60%; margin: 0 auto; display: block;" />
+            Report Stars
+        </a>
 
-        <form class="list">
+        <form class="list" style="display:{{display}}">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Bribe Amount (Rs.)</span>
                 <input type="number" placeholder="Bribe Amount (Rs.)">
