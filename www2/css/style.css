@@ -1,0 +1,32 @@
+#map {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.scroll {
+    height: 100%;
+}
+
+ion-header-bar form {
+    position: relative;
+}
+form .ion-navigate {
+    color: #333 !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+#report-button {
+    background-color: rgb(210, 63, 49);
+    bottom: 10%;
+    color: #fff;
+    font-size: 2em;
+    padding: 5px;
+    position: absolute;
+    right: 10%;
+    text-decoration: none;
+    z-index: 1;
+}
