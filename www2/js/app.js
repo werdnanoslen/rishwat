@@ -1,7 +1,15 @@
-angular.module('Rishwat', ['ionic', 'Rishwat.controllers', 'Rishwat.services', 'Rishwat.directives'])
+angular.module('Rishwat', ['uiGmapgoogle-maps', 'Rishwat.controllers', 'Rishwat.services', 'Rishwat.directives'])
 
-.run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-        console.log("ionic is ready");
+.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
+    GoogleMapApi.configure({
+        //    key: 'your api key',
+        v: '3.16',
+        libraries: 'places'
     });
-});
+}])
+
+.run(['$templateCache', function ($templateCache) {
+    console.log('angular is ready');
+    $templateCache.put('searchbox.tpl.html', '<input id="pac-input" class="pac-controls" type="text" placeholder="Search">');
+    $templateCache.put('window.tpl.html', '<div ng-controller="WindowCtrl" ng-init="showPlaceDetails(parameter)">{{place.name}}</div>');
+}])

@@ -1,0 +1,14 @@
+{
+  "name": "Rishwat",
+  "version": "0.0.0",
+  "homepage": "https://github.com/werdnanoslen/rishwat",
+  "authors": [
+    "Andrew Nelson <andy@andyhub.com>"
+  ],
+  "license": "GPLv2",
+  "private": true,
+  "dependencies": {
+    "angular-material": "~0.6.1",
+    "angular-google-maps": "~2.0.12"
+  }
+}
