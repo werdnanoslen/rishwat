@@ -2,7 +2,7 @@ angular.module('Rishwat', ['uiGmapgoogle-maps', 'Rishwat.controllers', 'Rishwat.
 
 .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
     GoogleMapApi.configure({
-        //    key: 'your api key',
+        key: 'AIzaSyDBfZ9vnEaCCBRg0Q2qYjKH5QDzysVhHps',
         v: '3.16',
         libraries: 'places'
     });
