@@ -11,10 +11,9 @@ angular.module('Rishwat.controllers', [])
     $log.doLog = true
 
     GoogleMapApi.then(function(maps) {
-        maps.visualRefresh = true;
         $scope.defaultBounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(38.769020, 59.004100),
-            new google.maps.LatLng(21.491343, 79.614451)
+            new google.maps.LatLng(38.820396, 58.916209),
+            new google.maps.LatLng(21.675231, 79.658396)
         );
 
         $scope.map.bounds = {
@@ -29,40 +28,19 @@ angular.module('Rishwat.controllers', [])
         };
 
         $scope.searchbox.options.bounds = new google.maps.LatLngBounds($scope.defaultBounds.getNorthEast(), $scope.defaultBounds.getSouthWest());
+        console.log('map is ready');
     });
 
     angular.extend($scope, {
-        selected: {
-            options: {
-                visible:false
-            },
-            templateurl:'window.tpl.html',
-            templateparameter: {}
-        },
         map: {
-            control: {},
+            bounds: {
+            },
             center: {
                 latitude: 30.370445,
                 longitude: 70.012400
             },
-            zoom: 6,
-            dragging: false,
-            bounds: {
-                // new google.maps.LatLng(38.769020, 59.004100),
-                // new google.maps.LatLng(21.491343, 79.614451)
-            },
-            markers: [],
-            idkey: 'place_id',
-            events: {
-                idle: function (map) {},
-                dragend: function(map) {
-                    //update the search box bounds after dragging the map
-                    var bounds = map.getBounds();
-                    var ne = bounds.getNorthEast();
-                    var sw = bounds.getSouthWest();
-                    $scope.searchbox.options.bounds = new google.maps.LatLngBounds(sw, ne);
-                }
-            }
+            disableDefaultUI: true,
+            zoom: 6
         },
         searchbox: {
             template:'searchbox.tpl.html',
@@ -72,7 +50,7 @@ angular.module('Rishwat.controllers', [])
             parentdiv:'searchBoxParent',
             events: {
                 places_changed: function (searchBox) {
-                    places = searchBox.getPlaces()
+                    places = searchBox.getPlaces();
                     if (places.length == 0) {
                         return;
                     }
