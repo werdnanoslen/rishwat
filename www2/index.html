@@ -4,14 +4,18 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Rishwat</title>
 
-    <link href="bower_components\angular-material\angular-material.min.css" rel="stylesheet">
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+    <link href="bower_components/angular-material/themes/green-theme.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- components -->
-    <script src="bower_components\angular\angular.min.js"></script>
-    <script src="bower_components\angular-material\angular-material.min.js"></script>
-    <script src='bower_components\lodash\dist\lodash.min.js'></script>
-    <script src='bower_components\angular-google-maps\dist\angular-google-maps.min.js'></script>
+    <script src='bower_components/angular/angular.min.js'></script>
+    <script src='bower_components/angular-aria/angular-aria.min.js'></script>
+    <script src='bower_components/angular-animate/angular-animate.min.js'></script>
+    <script src='bower_components/hammerjs/hammer.min.js'></script>
+    <script src='bower_components/angular-material/angular-material.min.js'></script>
+    <script src='bower_components/lodash/dist/lodash.min.js'></script>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
 
     <!--  app js -->
     <script src="js/app.js"></script>
@@ -21,34 +25,38 @@
 </head>
 
 <body ng-app="Rishwat" ng-controller="MapCtrl">
-    <header>
-        <h1 class="title">Rishwat</h1>
-        <form id="map-search">
-            <div id="searchBoxParent"></div>
-            <a ng-click="centerOnMe()">Center</a>
-        </form>
-    </header>
-    <main>
+    <md-toolbar md-theme="green">
+        <div class="md-toolbar-tools">
+            <h2>Rishwat</h2>
+            <div id="searchBoxParent">
+                <md-button aria-label="Get location">
+                    <md-icon icon="bower_components\material-design-icons/maps/svg/production/ic_my_location_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-content>
         <a href="#/report" id="report-button">Add</a>
 
         <ui-gmap-google-map
-            center="map.center"
-            zoom="map.zoom"
-            dragging="map.dragging"
             bounds="map.bounds"
+            center="map.center"
+            control="map.control"
+            disabled-default-u-i="true"
+            dragging="map.dragging"
             events="map.events"
             options="map.options"
             pan="true"
-            control="map.control">
+            zoom="map.zoom">
 
             <ui-gmap-search-box
-                options="searchbox.options"
-                template="searchbox.template"
                 events="searchbox.events"
-                parentdiv="searchbox.parentdiv">
+                options="searchbox.options"
+                parentdiv="searchbox.parentdiv"
+                template="searchbox.template">
             </ui-gmap-search-box>
-            
+
         </ui-gmap-google-map>
-    </main>
+    </md-content>
 </body>
 </html>

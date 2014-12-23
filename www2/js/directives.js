@@ -1,1 +1,1 @@
-angular.module('Rishwat.directives', [])
+angular.module('Rishwat.directives', ['ngMaterial'])

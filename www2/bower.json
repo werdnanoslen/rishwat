@@ -9,6 +9,7 @@
   "private": true,
   "dependencies": {
     "angular-material": "~0.6.1",
-    "angular-google-maps": "~2.0.12"
+    "angular-google-maps": "~2.0.12",
+    "material-design-icons": "~1.0.1"
   }
 }

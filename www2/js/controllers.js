@@ -40,6 +40,9 @@ angular.module('Rishwat.controllers', [])
                 longitude: 70.012400
             },
             disableDefaultUI: true,
+            options: {
+                disableDefaultUI: true
+            },
             zoom: 6
         },
         searchbox: {
