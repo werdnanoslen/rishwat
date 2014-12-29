@@ -93,4 +93,12 @@ angular.module('Rishwat.controllers', [])
             } //events
         } //searchbox
     }); //angular.extend
-}]);
+}])
+
+.controller('AddCtrl', function ($scope) {
+    console.log('loaded AddCtrl');
+})
+
+.controller('ReportCtrl', function ($scope) {
+    console.log('loaded ReportCtrl');
+});

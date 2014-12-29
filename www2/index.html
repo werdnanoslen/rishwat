@@ -9,7 +9,8 @@
     <link href="css/style.css" rel="stylesheet">
 
     <!-- components -->
-    <script src='bower_components/angular/angular.min.js'></script>
+    <script src='bower_components/angular/angular.js'></script>
+    <script src='bower_components/angular-route/angular-route.min.js'></script>
     <script src='bower_components/angular-aria/angular-aria.min.js'></script>
     <script src='bower_components/angular-animate/angular-animate.min.js'></script>
     <script src='bower_components/hammerjs/hammer.min.js'></script>
@@ -24,39 +25,7 @@
     <script src="js/directives.js"></script>
 </head>
 
-<body ng-app="Rishwat" ng-controller="MapCtrl">
-    <md-toolbar md-theme="green">
-        <div class="md-toolbar-tools">
-            <h2>Rishwat</h2>
-            <div id="searchBoxParent">
-                <md-button aria-label="Get location">
-                    <md-icon icon="bower_components\material-design-icons/maps/svg/production/ic_my_location_24px.svg" style="width: 24px; height: 24px;"></md-icon>
-                </md-button>
-            </div>
-        </div>
-    </md-toolbar>
-    <md-content>
-        <a href="#/report" id="report-button">Add</a>
-
-        <ui-gmap-google-map
-            bounds="map.bounds"
-            center="map.center"
-            control="map.control"
-            disabled-default-u-i="true"
-            dragging="map.dragging"
-            events="map.events"
-            options="map.options"
-            pan="true"
-            zoom="map.zoom">
-
-            <ui-gmap-search-box
-                events="searchbox.events"
-                options="searchbox.options"
-                parentdiv="searchbox.parentdiv"
-                template="searchbox.template">
-            </ui-gmap-search-box>
-
-        </ui-gmap-google-map>
-    </md-content>
+<body ng-app="Rishwat">
+    <div ng-view></div>
 </body>
 </html>

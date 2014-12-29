@@ -1,10 +1,31 @@
-angular.module('Rishwat', ['uiGmapgoogle-maps', 'Rishwat.controllers', 'Rishwat.services', 'Rishwat.directives'])
+angular.module('Rishwat', ['ngRoute', 'uiGmapgoogle-maps', 'Rishwat.controllers', 'Rishwat.services', 'Rishwat.directives'])
 
 .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
     GoogleMapApi.configure({
         key: 'AIzaSyDBfZ9vnEaCCBRg0Q2qYjKH5QDzysVhHps',
         v: '3.16',
         libraries: 'places'
+    });
+}])
+
+.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.when(
+        '/map', {
+            templateUrl: 'partials/map.html',
+            controller: 'MapCtrl'
+        }
+    ).when(
+        '/add', {
+            templateUrl: 'partials/add.html',
+            controller: 'AddCtrl'
+        }
+    ).when(
+        '/report/:report', {
+            templateUrl: 'partials/report.html',
+            controller: 'ReportCtrl'
+        }
+    ).otherwise({
+        redirectTo: '/map'
     });
 }])
 
