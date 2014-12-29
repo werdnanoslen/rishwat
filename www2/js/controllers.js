@@ -1,21 +1,12 @@
 angular.module('Rishwat.controllers', [])
 
-.controller('WindowCtrl', function ($scope) {
-    $scope.place = {};
-    $scope.showPlaceDetails = function(param) {
-        $scope.place = param;
-    }
-})
-
-.controller("MapCtrl", ['$scope', '$timeout', 'uiGmapLogger', '$http','uiGmapGoogleMapApi', function ($scope, $timeout, $log, $http, GoogleMapApi) {
-    $log.doLog = true
-
+.controller("MapCtrl", ['$scope', '$http','uiGmapGoogleMapApi', function ($scope, $http, GoogleMapApi, $location) {
+    //Prep map, bound to Pakistan borders
     GoogleMapApi.then(function(maps) {
         $scope.defaultBounds = new google.maps.LatLngBounds(
             new google.maps.LatLng(38.820396, 58.916209),
             new google.maps.LatLng(21.675231, 79.658396)
         );
-
         $scope.map.bounds = {
             northeast: {
                 latitude:$scope.defaultBounds.getNorthEast().lat(),
@@ -26,12 +17,29 @@ angular.module('Rishwat.controllers', [])
                 longitude:-$scope.defaultBounds.getSouthWest().lng()
             }
         };
-
         $scope.searchbox.options.bounds = new google.maps.LatLngBounds($scope.defaultBounds.getNorthEast(), $scope.defaultBounds.getSouthWest());
         console.log('map is ready');
     });
 
     angular.extend($scope, {
+        findMe: function() {
+            if (navigator.geolocation) {
+                console.log('fetching location...');
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    $scope.map.center = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+                    $scope.map.zoom = 15;
+                    console.log('found location: ', $scope.map.center);
+                    $scope.$apply();
+                }, function (error) {
+                    console.log('geolocation failed: ', err.message);
+                });
+            } else {
+                console.log('geolocation unavailable');
+            }
+        },
         map: {
             bounds: {
             },
