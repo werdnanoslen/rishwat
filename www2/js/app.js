@@ -20,7 +20,7 @@ angular.module('Rishwat', ['ngRoute', 'uiGmapgoogle-maps', 'Rishwat.controllers'
             controller: 'AddCtrl'
         }
     ).when(
-        '/report/:report', {
+        '/report/:reportId', {
             templateUrl: 'partials/report.html',
             controller: 'ReportCtrl'
         }

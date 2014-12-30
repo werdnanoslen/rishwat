@@ -1,4 +1,4 @@
-angular.module('Rishwat.controllers', [])
+angular.module('Rishwat.controllers', ['ngMaterial'])
 
 .controller("MapCtrl", ['$scope', '$http','uiGmapGoogleMapApi', function ($scope, $http, GoogleMapApi, $location) {
     //Prep map, bound to Pakistan borders
@@ -103,10 +103,21 @@ angular.module('Rishwat.controllers', [])
     }); //angular.extend
 }])
 
-.controller('AddCtrl', function ($scope) {
+.controller('AddCtrl', function ($scope, $location) {
     console.log('loaded AddCtrl');
+
+    $scope.submit = function() {
+        console.log($scope.report);
+        $location.path("/report/1");
+    }
 })
 
-.controller('ReportCtrl', function ($scope) {
+.controller('ReportCtrl', function ($scope, $routeParams) {
     console.log('loaded ReportCtrl');
+    $scope.report = {
+        id: $routeParams.reportId,
+        amount: '9',
+        location: 'here',
+        reason: 'because'
+    };
 });
