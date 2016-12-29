@@ -1,0 +1,65 @@
+<ion-view view-title="Posts Nearby">
+    <ion-nav-bar align-title="center" class="bar-positive">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear icon ion-ios-list-outline"
+                    ui-sref="list"
+                    nav-direction="swap">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear icon ion-plus"
+                    ui-sref="add">
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content scroll="false">
+        <div class="item item-divider flex" id="searchBar">
+            <div id="searchBarBox" class="flex-item">
+                <button class="button button-small button-icon icon ion-ios-close-empty flex-item"
+                        ng-click="clearSearch()" ng-show="explicitSearch">
+                </button>
+            </div>
+            <button class="button button-small button-icon icon ion-pinpoint flex-item"
+                    ng-click="centerOnMe()">
+            </button>
+        </div>
+        <ui-gmap-google-map
+            center="map.center"
+            bounds="map.bounds"
+            control="map.control"
+            events="map.events"
+            options="map.options"
+            pan="true"
+            zoom="map.zoom">
+            <ui-gmap-search-box
+                ng-model="search.place"
+                events="map.searchbox.events"
+                options="map.searchbox.options"
+                parentdiv="map.searchbox.parentdiv"
+                template="map.searchbox.template">
+            </ui-gmap-search-box>
+            <ui-gmap-marker
+                coords="map.position.coords"
+                idKey="'map.position.id'"
+                icon="map.position.icon"
+                options="map.position.options">
+            </ui-gmap-marker>
+            <ui-gmap-markers
+                typeEvents="reports.events"
+                models="reports.markers"
+                options="reports.options"
+                coords="'self'"
+                type="'spider'"
+                clusterOptions="map.options.cluster">
+            </ui-gmap-markers>
+            <ui-gmap-markers
+                typeEvents="suggestions.events"
+                models="suggestions.markers"
+                options="suggestions.options"
+                coords="'self'"
+                type="'spider'"
+                clusterOptions="map.options.cluster">
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </ion-content>
+</ion-view>
