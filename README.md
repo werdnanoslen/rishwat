@@ -5,7 +5,7 @@ Rishwat is an app for reporting instances of bribery in Pakistan.
 1. Run ```npm install```
 1. Run ```bower install```
 1. Rename .env.example to just .env and add your secret keys/config
-1. Import api/reports.sql and api/users.sql
+1. Import api/reports.sql
 1. Run ```npm start```
 
 ### License
