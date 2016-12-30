@@ -1,20 +1,6 @@
 # Rishwat
 Rishwat is an app for reporting instances of bribery in Pakistan.
 
-### TODO
-* Report that I just bribed someone
-   * For what?
-   * How much?
-   * Where?
-   * When?
-* See how often a place/person is bribed
-   * Where?
-   * How much?
-   * When?
-* See a bigger picture of above
-   * Filters
-* Games?
-
 ### Installation
 1. Run ```npm install```
 1. Run ```bower install```

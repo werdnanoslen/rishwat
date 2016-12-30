@@ -28,17 +28,15 @@
                                 disabled>
                     </textarea>
                 </label>
-                <label class="item" ng-hide="form.which === null">
-                    Which is it?
-                    <span class="badge badge-{{form.which ? 'stable' : 'assertive'}}">
-                        {{form.which ? 'YES' : 'NO'}}
-                    </span>
+                <label class="item item-input item-floating-label" ng-hide="form.price === null">
+                    <span class="input-label has-input">How much was it?</span>
+                    <input name="price" ng-model="form.price" type="number" disabled>
                 </label>
                 <label class="item item-input item-floating-label" ng-hide="form.notes === null">
-                    <span class="input-label">Why?</span>
+                    <span class="input-label">Details</span>
                     <textarea   name="why"
                                 ng-model="form.why"
-                                placeholder="Why?"
+                                placeholder="Details"
                                 rows="2"
                                 disabled>
                     </textarea>

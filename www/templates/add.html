@@ -63,20 +63,15 @@
                                 rows="1">
                     </textarea>
                 </label>
-                <div class="item item-stacked-label">
-                    <label class="input-label has-input" for="which">
-                        Which is it?
-                    </label>
-                    <div class="button-bar" id="which">
-                        <a grouped-radio="1" ng-model="form.which">Yes</a>
-                        <a grouped-radio="0" ng-model="form.which">No</a>
-                    </div>
-                </div>
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Why</span>
+                    <span class="input-label has-input">How much was it?</span>
+                    <input name="price" ng-model="form.price" type="number" placeholder="How much was it?">
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Details</span>
                     <textarea   name="why"
                                 ng-model="form.why"
-                                placeholder="Why?"
+                                placeholder="Details"
                                 rows="3">
                 </textarea>
             </label>

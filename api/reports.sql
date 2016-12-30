@@ -29,14 +29,13 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `reports` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `datetime_reported` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `what` text COMMENT 'What is it',
+  `what` text COMMENT 'What the bribe was for',
+  `price` decimal(18,2) COMMENT 'How much the bribe cost',
   `photo` text COMMENT 'URL to photo for this report',
-  `which` tinyint(1) DEFAULT NULL COMMENT 'Which is it?',
   `why` varchar(255) DEFAULT NULL COMMENT 'Why?',
   `place` varchar(255) DEFAULT NULL COMMENT 'Friendly name of report place',
   `lat` decimal(10,8) DEFAULT NULL COMMENT 'Latitude of report place',
   `lng` decimal(11,8) DEFAULT NULL COMMENT 'Longitude of report place',
-  `owner` int(11) NOT NULL COMMENT 'UID of user who owns this report',
   `visibility` enum('public','limited','closed') NOT NULL DEFAULT 'public' COMMENT 'Public ops are visible to all, limited ops are visible to owner and advisors, closed events are visible only to owner',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Whether this posting is active as described',
   PRIMARY KEY (`id`)

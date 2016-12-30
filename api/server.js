@@ -4,7 +4,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var cloudinary = require('cloudinary');
-var dotenv = require('dotenv').config({path: '/var/www/demos/mobile-map-io/api/.env'});
+var dotenv = require('dotenv').config({path: '/var/www/demos/rishwat/api/.env'});
 
 // Configure database connection
 function Connection() {
@@ -45,7 +45,7 @@ function allowCrossDomain(req, res, next) {
 
 // Routes
 var api = process.env.APIPATH;
-var columns = ["datetime_occurred", "why", "what", "which", "place", "lat", "lng"];
+var columns = ["datetime_reported", "why", "what", "price", "place", "lat", "lng"];
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_KEY,
@@ -55,7 +55,7 @@ cloudinary.config({
 // Get API info
 router.get("/", function(req, res) {
     res.json({
-        "Message": "This is the mobile-map-io API"
+        "Message": "This is the Rishwat API"
     });
 });
 
@@ -194,17 +194,17 @@ router.post("/reports", function(req, res) {
         if (link) {
             table = [
                 "reports", "why", "place", "lat", "lng",
-                "what", "which", "photo",
+                "what", "price", "photo",
                 report.why, report.place, report.lat, report.lng,
-                report.what, report.which, link
+                report.what, report.price, link
             ];
             query = "INSERT INTO ??(??,??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?,?)";
         } else {
             table = [
                 "reports", "why", "place", "lat", "lng",
-                "what", "which",
+                "what", "price",
                 report.why, report.place, report.lat, report.lng,
-                report.what, report.which
+                report.what, report.price
             ];
             query = "INSERT INTO ??(??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?)";
         }
@@ -286,5 +286,5 @@ app.use(allowCrossDomain);
 app.use(process.env.APIPATH, router);
 connection.init();
 var server = app.listen(process.env.PORT, function() {
-    console.log('mobile-map-io API listening at port ' + server.address().port);
+    console.log('Rishwat API listening at port ' + server.address().port);
 });
