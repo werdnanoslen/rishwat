@@ -9,4 +9,4 @@ Rishwat is an app for reporting instances of bribery in Pakistan.
 1. Run ```npm start```
 
 ### License
-This software is licensed to Andrew Nelson, see the LICENSE file. If you would like an exception to this license for commercial/proprietary derivative work, please email me. It is based on my open-source project [mobile-map-io](https://github.com/werdnanoslen/mobile-map-io).
+This software is licensed to Andrew Nelson, see the LICENSE file. If you would like an exception to this license for commercial/proprietary derivative work, please email me. It is based on my open-source project [rishwat](https://github.com/werdnanoslen/rishwat).
