@@ -96,6 +96,7 @@ angular.module('controllers')
             $scope.setCenter(pos.coords.latitude, pos.coords.longitude);
             $ionicLoading.hide();
         }, function(error) {
+            $log.error('Unable to get location from device: ', error.message);
             var promise = API.ipGeolocate();
             promise.then(
                 function (payload) {
@@ -104,11 +105,12 @@ angular.module('controllers')
                     $ionicLoading.hide();
                 },
                 function (errorPayload) {
-                    $log.error('Unable to get location', errorPayload);
+                    $log.error('Unable to get location by IP: ', errorPayload);
                     $ionicLoading.hide();
+                    $log.log('Using default lat & lng: ' + $scope.defaultLat + ', ' + $scope.defaultLng);
+                    $scope.setCenter($scope.defaultLat, $scope.defaultLng);
                 }
             );
-            $log.error('Unable to get location', error.message);
         });
     };
 

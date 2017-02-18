@@ -10,6 +10,8 @@ angular.module('rishwat', [
 
 .run(function($ionicPlatform, $rootScope) {
     $rootScope.search = {};
+    $rootScope.defaultLat = 0;
+    $rootScope.defaultLng = 0;
     $ionicPlatform.ready(function() {
     });
 })
