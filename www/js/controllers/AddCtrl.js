@@ -50,6 +50,19 @@ angular.module('controllers')
         },
         zoom: 15
     };
+    $scope.whatSelect = {
+        options: [
+            {
+                name: 'Driving License',
+                value: 'Driving License'
+            },
+            {
+                name: 'Other',
+                value: 'Other'
+            }
+        ],
+        selection: undefined
+    };
 
     var autocomplete = new google.maps.places.Autocomplete(document.querySelector('#search'));
     autocomplete.addListener('place_changed', function() {
@@ -233,6 +246,12 @@ angular.module('controllers')
         reportJson.active = true;
         reportJson.lat = $scope.search.lat;
         reportJson.lng = $scope.search.lng;
+        if ($scope.whatSelect.selection != 'Other') {
+            reportJson.what = $scope.whatSelect.selection;
+        } else {
+            $scope.form.what = undefined;
+            reportJson.what = $scope.form.what;
+        }
         var promise = API.addReport(reportJson);
         promise.then(
             function (payload) {

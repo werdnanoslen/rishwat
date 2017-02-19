@@ -55,14 +55,18 @@
                         </ui-gmap-marker>
                     </ui-gmap-google-map>
                 </div>
-                <label class="item item-input item-floating-label">
+                <label class="item item-input item-select">
                     <span class="input-label">What is it?</span>
-                    <textarea   name="what"
-                                ng-model="form.what"
-                                placeholder="What is it?"
-                                rows="1">
-                    </textarea>
+                    <select ng-model='whatSelect.selection' ng-options='option.value as option.name for option in whatSelect.options'>
+                        <option value="" ng-show="whatSelect.selection == undefined">What is it?</option>
+                    </select>
                 </label>
+                <input  name="what"
+                        ng-show="whatSelect.selection == 'Other'"
+                        ng-model="form.what"
+                        placeholder="What is it?"
+                        class="item item-input item-borderless"
+                        style="width: 100%;">
                 <label class="item item-input item-floating-label">
                     <span class="input-label has-input">How much was it?</span>
                     <input name="price" ng-model="form.price" type="number" placeholder="How much was it?">
@@ -73,8 +77,8 @@
                                 ng-model="form.why"
                                 placeholder="Details"
                                 rows="3">
-                </textarea>
-            </label>
+                    </textarea>
+                </label>
             <div class="item">
                 <input type="file" class="hidden" id="fileInput">
                 <button class="button button-positive button-block"
