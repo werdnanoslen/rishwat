@@ -274,18 +274,21 @@ angular.module('controllers')
                     console.log('No exact address for this location: ', latlng);
                     var nearbyReq = {
                         location: latlng,
-                        radius: '1',
-                        types: ['store']
+                        // radius: 1,
+                        // type: 'store',
+                        // when types array is deprecated, replace rankBy and types with commented lines https://developers.google.com/maps/documentation/javascript/places#deprecation
+                        rankBy: google.maps.places.RankBy.DISTANCE,
+                        types: ['store', 'bus_station', 'park', 'bank', 'parking', 'pharmacy', 'doctor', 'school', 'police', 'fire_station', 'restaurant', 'lodging', 'hospital']
                     };
                     function nearbyCallback(results, status) {
                         if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-                            if (nearbyReq.radius > 10000) { // if over 10km away...
+                            // if (nearbyReq.radius > 10000) { // if over 10km away...
                                 $scope.form.place = latlng.toUrlValue();
-                            } else {
-                                nearbyReq.radius *= 10;
-                                console.log('Looking for landmarks within ' + nearbyReq.radius + ' meters...');
-                                placesService.nearbySearch(nearbyReq, nearbyCallback);
-                            }
+                            // } else {
+                            //     nearbyReq.radius *= 10;
+                            //     console.log('Looking for landmarks within ' + nearbyReq.radius + ' meters...');
+                            //     placesService.nearbySearch(nearbyReq, nearbyCallback);
+                            // }
                         } else if (status == google.maps.places.PlacesServiceStatus.OK) {
                             var place = results[0].name;
                             var placelatlng = results[0].geometry.location;
