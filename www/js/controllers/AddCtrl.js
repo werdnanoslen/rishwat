@@ -7,6 +7,7 @@ angular.module('controllers')
     var geocoder = new google.maps.Geocoder();
     // hacked because gmap's events don't include infowindow clicks
     $scope.Gmap;
+    $scope.actualMapObj;
     $scope.isDragging = false;
     $scope.form = {};
     $scope.keyboardSpace = "";
@@ -25,6 +26,11 @@ angular.module('controllers')
             },
             dragstart: function() {
                 $scope.isDragging = true;
+            },
+            tilesloaded: function (map) {
+                $scope.$apply(function () {
+                    $scope.actualMapObj = map;
+                });
             },
             zoom_changed: function(map) {
                 $scope.updateBounds(map);
@@ -64,7 +70,6 @@ angular.module('controllers')
         $scope.noGoingBack = (null === $ionicHistory.backView()) ? true : false;
         $scope.form = {};
         $scope.removePhoto();
-        console.log('place', $rootScope.search.place);
         if (undefined !== $rootScope.search.place) {
             $scope.form.place = $rootScope.search.place;
         }
@@ -267,7 +272,56 @@ angular.module('controllers')
                     $scope.form.place = topResult.formatted_address;
                 } else {
                     console.log('No exact address for this location: ', latlng);
-                    $scope.form.place = latlng.toUrlValue();
+                    var nearbyReq = {
+                        location: latlng,
+                        radius: '1',
+                        types: ['store']
+                    };
+                    function nearbyCallback(results, status) {
+                        if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+                            if (nearbyReq.radius > 10000) { // if over 10km away...
+                                $scope.form.place = latlng.toUrlValue();
+                            } else {
+                                nearbyReq.radius *= 10;
+                                console.log('Looking for landmarks within ' + nearbyReq.radius + ' meters...');
+                                placesService.nearbySearch(nearbyReq, nearbyCallback);
+                            }
+                        } else if (status == google.maps.places.PlacesServiceStatus.OK) {
+                            var place = results[0].name;
+                            var placelatlng = results[0].geometry.location;
+                            var distance = google.maps.geometry.spherical.computeDistanceBetween(placelatlng, latlng);
+                            if (distance > 100) {
+                                distance = (distance/1000).toFixed(1) + 'km';
+                            } else {
+                                distance = Math.round(distance) + 'm';
+                            }
+                            var heading = google.maps.geometry.spherical.computeHeading(placelatlng, latlng);
+                            var q = 90/4;
+                            if (q <= heading & heading < 3*q) {
+                                heading = 'northeast';
+                            } else if (3*q <= heading & heading < 5*q) {
+                                heading = 'east';
+                            } else if (5*q <= heading & heading < 7*q) {
+                                heading = 'southeast';
+                            } else if (-1*q >= heading & heading > -3*q) {
+                                heading = 'northwest';
+                            } else if (-3*q >= heading & heading > -5*q) {
+                                heading = 'west';
+                            } else if (-5*q >= heading & heading > -7*q) {
+                                heading = 'southwest';
+                            } else if (-7*q >= heading || heading >= 7*q) {
+                                heading = 'south';
+                            } else {
+                                heading = 'north';
+                            }
+                            var place = distance + ' ' + heading + ' of ' + place;
+                            $scope.$apply(function () {
+                                $scope.form.place = place;
+                            });
+                        }
+                    };
+                    var placesService = new google.maps.places.PlacesService($scope.actualMapObj);
+                    placesService.nearbySearch(nearbyReq, nearbyCallback);
                 }
             } else {
                 console.error('geocode error: ', status);
