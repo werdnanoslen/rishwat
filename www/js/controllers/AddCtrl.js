@@ -293,21 +293,13 @@ angular.module('controllers')
                     console.log('No exact address for this location: ', latlng);
                     var nearbyReq = {
                         location: latlng,
-                        // radius: 1,
-                        // type: 'store',
-                        // when types array is deprecated, replace rankBy and types with commented lines https://developers.google.com/maps/documentation/javascript/places#deprecation
                         rankBy: google.maps.places.RankBy.DISTANCE,
-                        types: ['store', 'bus_station', 'park', 'bank', 'parking', 'pharmacy', 'doctor', 'school', 'police', 'fire_station', 'restaurant', 'lodging', 'hospital']
+                        types: ['establishment', 'local_government_office', 'store', 'bus_station', 'park', 'bank', 'parking', 'pharmacy', 'doctor', 'school', 'police', 'fire_station', 'restaurant', 'lodging', 'hospital']
+                        // when types array is deprecated, change to type and just remove all but one value
                     };
                     function nearbyCallback(results, status) {
                         if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-                            // if (nearbyReq.radius > 10000) { // if over 10km away...
-                                $scope.form.place = latlng.toUrlValue();
-                            // } else {
-                            //     nearbyReq.radius *= 10;
-                            //     console.log('Looking for landmarks within ' + nearbyReq.radius + ' meters...');
-                            //     placesService.nearbySearch(nearbyReq, nearbyCallback);
-                            // }
+                            $scope.form.place = latlng.toUrlValue();
                         } else if (status == google.maps.places.PlacesServiceStatus.OK) {
                             var place = results[0].name;
                             var placelatlng = results[0].geometry.location;
